@@ -4,8 +4,14 @@
 
 using namespace std;
 
+string intToString(int p) {
+    stringstream ss;
+    ss << p;
+    return ss.str();
+}
+
 //~ TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,ip,"/tmp/"),chord(NULL) {
-TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,"chordTestBed","/tmp/"),chord(NULL) {
+TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,ip+intToString(port),"/tmp/"),chord(NULL) {
     cout << "constructor called" << endl;
 }
 
