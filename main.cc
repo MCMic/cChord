@@ -5,7 +5,7 @@ using namespace std;
 #include <myMed/ProtocolSingleton.h>
 
 // This application receives args, "ip", "port" [, "ip2", "port2"]
-int main(int argc, char * const argv[]) {
+int main(int argc, char * const argv[]) {	
     if(argc<3) {
         cout << "usage : " << argv[0] << " myIp myPort [otherIp otherPort]" << endl;
         return EXIT_SUCCESS;
