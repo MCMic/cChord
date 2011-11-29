@@ -3,10 +3,16 @@ using namespace std;
 #include "lib/TextHandler.hh"
 #include <stdlib.h>
 
-// This application receives args, "ip", "port", "overlay identifier (unique string)", "root directory)"
+// This application receives args, "ip", "port" [, "ip2", "port2"]
 int main(int argc, char * const argv[]) {
+    if(argc<3) {
+        cout << "usage : " << argv[0] << " myIp myPort [otherIp otherPort]" << endl;
+        return EXIT_SUCCESS;
+    }
+        
     TextHandler th(string(argv[1]), atoi(argv[2]));
-    if(argc>3) {
+    if(argc>4) {
+        cout << "connecting to " << argv[3] << ":" << argv[4] << endl;
         th.connect(string(argv[3]), atoi(argv[4]));
     }
     

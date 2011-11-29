@@ -15,6 +15,7 @@
  *	Constructors
  */
 Node::Node(const string &inIp, unsigned int inId, unsigned int inPort) {
+    cout << "Node constructor " << inIp << endl;
 	ip = inIp;
 	nid = inId;
 	port = inPort;

@@ -18,6 +18,7 @@
 //                  INITIALISE                 //
 // /////////////////////////////////////////// //
 void AbstractChord::initialise(string ip, int id, int port) {
+    cout << "AbstractChord init " << ip << "," << id << "," << port << endl;
 	thisNode = new Node(ip, id, port);
 	successor = thisNode;
 	predecessor = thisNode;
@@ -136,7 +137,7 @@ string AbstractChord::printStatus() {
 			<< thisNode->getPort() << "\n" << "<NODE: " << thisNode->getId()
 			<< ", PRED: " << predecessor->getId() << ", SUCC: "
 			<< successor->getId() << ">\n" << "\tFingers Table: [";
-	for (int i = 0; i < fingerTable.size() - 1; i++) {
+	for (unsigned i = 0; i < fingerTable.size() - 1; i++) {
 		ss << fingerTable[i]->getId() << ", ";
 	}
 	ss << fingerTable[fingerTable.size() - 1]->getId() << "]\n\n";

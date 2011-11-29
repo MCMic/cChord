@@ -76,6 +76,7 @@ void ChordNode::notify(Node *n) {
 
 /* Custom chord stabilize */
 void ChordNode::stabilize() {
+    cout << "stabilize" << endl;
 	((AbstractChord *) this)->stabilize();
 	// If the predecessor as changed, update the DHT table
 	if (notified && predecessor->getId() != thisNode->getId()) {
@@ -83,7 +84,7 @@ void ChordNode::stabilize() {
 		char path[256];
 		DIR *dir = opendir(PERSISTENCE_DIR.c_str());
 		if(dir != NULL){
-			while(dirEntry=readdir(dir)) {
+			while( (dirEntry=readdir(dir)) ) {
 				if(dirEntry->d_type != DT_DIR){
 					int hFilename = getIntSHA1(dirEntry->d_name);
 					if (!insideRange(hFilename, predecessor->getId(), thisNode->getId())){
@@ -266,7 +267,7 @@ string ChordNode::sendRequest(Request *request, Node* destination) {
 
 /* Fix broken pointers algorithm */
 void ChordNode::fixBrokenPointers(Node *node) {
-	for (int i = 0; i < fingerTable.size() - 1; i++) {
+	for (unsigned i = 0; i < fingerTable.size() - 1; i++) {
 		if (fingerTable[i]->getId() == node->getId()) {
 			fingerTable[i] = new Node(thisNode->toString());
 		} 
@@ -281,7 +282,7 @@ void ChordNode::fixBrokenPointers(Node *node) {
 
 /* return true if the node is completely disconnected of the chord */
 bool ChordNode::isAlone(){
-	for (int i = 0; i < fingerTable.size() - 1; i++) {
+	for (unsigned i = 0; i < fingerTable.size() - 1; i++) {
 		if (fingerTable[i]->getId() != thisNode->getId()){
 			return false;
 		}
@@ -315,7 +316,7 @@ void ChordNode::shutDown() {
 		struct dirent *dirEntry;
 		DIR *dir = opendir(PERSISTENCE_DIR.c_str());
 		char path[256];
-		while(dirEntry=readdir(dir)) {
+		while( (dirEntry=readdir(dir)) ) {
 			if(dirEntry->d_type != DT_DIR){
 				request = new Request(this->getIdentifier(), PUT);
 				request->addArg("key", dirEntry->d_name);

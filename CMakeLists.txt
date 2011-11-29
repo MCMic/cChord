@@ -8,9 +8,9 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/engine/helper
     )
 
-#~ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -fopenmp -march=native")
-#~ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -pg -fopenmp -march=native")
-#~ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O2 -fopenmp -mtune=generic  -static-libgcc  -static-libstdc++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -pg")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O2 -mtune=generic  -static-libgcc  -static-libstdc++")
 
 add_executable(distributedWord
     ${PROJECT_SOURCE_DIR}/main.cc
