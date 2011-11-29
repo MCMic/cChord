@@ -9,10 +9,10 @@
 #ifndef ABSTRACTCHORD_H
 #define ABSTRACTCHORD_H
 
-#include "Node.h"
+#include "node/Node.h"
 #include "ChordTransportCode.h"
-#include "IOverlay.h"
-#include "Request.h"
+#include "transport/IOverlay.h"
+#include "request/Request.h"
 #include <vector>
 #include <map>
 

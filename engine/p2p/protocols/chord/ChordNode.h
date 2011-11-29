@@ -12,10 +12,10 @@
 #ifndef CHORDNODE_H
 #define CHORDNODE_H
 
-#include "IOverlay.h"
-#include "IRequestHandler.h"
-#include "AbstractChord.h"
-#include "TransportHTTP.h"
+#include "transport/IOverlay.h"
+#include "transport/IRequestHandler.h"
+#include "protocols/chord/AbstractChord.h"
+#include "transport/http/TransportHTTP.h"
 #include <string>
 #include <map>
 
@@ -46,13 +46,13 @@ public:
 	void stabilize();
 
 	/* IOverlay Pure METHODS */
-	void   put(string key, string value);
+	virtual void   put(string key, string value);
 	string get(string key);
 	void   removekey(string key);
 
 
 	/* data CRUD */
-	void saveData(string filename, string value);
+	virtual void saveData(string filename, string value);
 	string openData(string filename);
 	string serialize(string data);
 	string unserialize(string data);

@@ -9,8 +9,8 @@
 #ifndef TRANSPORT_HTTP_H
 #define TRANSPORT_HTTP_H
 
-#include "ITransport.h"
-#include "mongoose.h"
+#include "transport/ITransport.h"
+#include "mongoose_http_server/mongoose.h"
 #include <iostream>
 #include <string>
 #include <sstream>

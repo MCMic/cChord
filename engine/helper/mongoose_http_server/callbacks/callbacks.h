@@ -10,9 +10,9 @@
 #ifndef CALLBACKS_H
 #define CALLBACKS_H
 
-#include "AbstractChord.h"
+#include "protocols/chord/AbstractChord.h"
 #include "chord_callbacks.h"
-#include "http_operations.h"
+#include "transport/http/http_operations.h"
 #include <stdlib.h>
 
 /*

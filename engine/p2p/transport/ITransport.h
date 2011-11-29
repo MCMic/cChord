@@ -14,8 +14,8 @@
 #define ITRANSPORT_H
 
 #include <string>
-#include "Node.h"
-#include "Request.h"
+#include "node/Node.h"
+#include "request/Request.h"
 
 class ITransport
 {

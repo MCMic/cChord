@@ -17,8 +17,8 @@
 #define CHECKPRED_H
 
 #include "Thread.h"
-#include "ChordNode.h"
-#include "ProtocolSingleton.h"
+#include "protocols/chord/ChordNode.h"
+#include "protocols/ProtocolSingleton.h"
 
 class CheckPred: public Thread {
 

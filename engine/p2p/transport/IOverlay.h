@@ -15,7 +15,7 @@
 #define IOVERLAY_H
 
 #include "IRequestHandler.h"
-#include "Node.h"
+#include "node/Node.h"
 #include "ITransport.h"
 #include <string>
 

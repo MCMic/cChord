@@ -6,8 +6,8 @@
  *
  */
 
-#include "AbstractChord.h"
-#include "ProtocolSingleton.h"
+#include "protocols/chord/AbstractChord.h"
+#include "protocols/ProtocolSingleton.h"
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>

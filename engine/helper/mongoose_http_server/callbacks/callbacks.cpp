@@ -15,9 +15,9 @@
 #include <sys/socket.h>
 #include <string.h>
 #include <iostream>
-#include "mongoose.h"
-#include "ChordTransportCode.h"
-#include "ProtocolSingleton.h"
+#include "mongoose_http_server/mongoose.h"
+#include "protocols/chord/ChordTransportCode.h"
+#include "protocols/ProtocolSingleton.h"
 
 /*
  *	Tracker request handler. This function should handle the tracker response,
