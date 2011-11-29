@@ -1,5 +1,5 @@
 CC = /usr/bin/g++
-CC_OPTIONS = -I.
+CC_OPTIONS = -I. -I..
 
 
 #if we passed ARCH=osx
