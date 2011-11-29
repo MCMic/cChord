@@ -1,6 +1,7 @@
 
 #include "TextHandler.hh"
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -19,6 +20,11 @@ void TextHandler::connect(string ip,int port) {
     cout << "connect called" << endl;
     chord = new Node(ip, port);
     join(chord);
+    
+    Request *request = new Request(this->getIdentifier(), GET);
+    request->addArg("key", "dummy_key");
+    // Send the Put request
+    content = sendRequest(request, successor);
 }
 
 void TextHandler::insertText(int pos, string str) {
@@ -46,15 +52,25 @@ void TextHandler::put(string key, string value) {
 	sendRequest(request, successor);
 }
 
+/* DHT Get */
+string TextHandler::get(string) {
+	return content;
+}
+
+
 /* data CRUD */
 void TextHandler::saveData(string filename, string value) {
     cout << "saveData called" << endl;
-    value = unserialize(value);
-    stringstream ss(value);
-    int pos;
-    ss >> pos;
-    value.erase(0,value.find(" ")+1);
-    content.insert(pos,value);
+    try {
+        value = unserialize(value);
+        stringstream ss(value);
+        int pos;
+        ss >> pos;
+        value.erase(0,value.find(" ")+1);
+        content.insert(pos,value);
+    } catch(std::out_of_range e) {
+        cout << "out of range" << endl;
+    }
 }
 
 void updateNeeded() {

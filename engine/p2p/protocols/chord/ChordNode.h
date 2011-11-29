@@ -47,7 +47,7 @@ public:
 
 	/* IOverlay Pure METHODS */
 	virtual void   put(string key, string value);
-	string get(string key);
+	virtual string get(string key);
 	void   removekey(string key);
 
 

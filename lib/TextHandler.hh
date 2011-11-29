@@ -13,6 +13,7 @@ class TextHandler : public ChordNode {
         
         /* IOverlay Pure METHODS */
         void   put(string key, string value);
+        string get(string);
         /* data CRUD */
         void saveData(string filename, string value);
     public:

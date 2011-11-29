@@ -252,6 +252,7 @@ string ChordNode::sendRequest(Request *request, Node* destination) {
 		free(response); // we must free the initial char* response, to avoid leaks.
 		return ss.str();
 	} else {
+        
 		// Fix the broken pointers of the node
 		fixBrokenPointers(destination);
 		// time to fix the chord
@@ -267,6 +268,7 @@ string ChordNode::sendRequest(Request *request, Node* destination) {
 
 /* Fix broken pointers algorithm */
 void ChordNode::fixBrokenPointers(Node *node) {
+    cout << "This node seems broken : " << node->toString() << endl;
 	for (unsigned i = 0; i < fingerTable.size() - 1; i++) {
 		if (fingerTable[i]->getId() == node->getId()) {
 			fingerTable[i] = new Node(thisNode->toString());
@@ -274,7 +276,7 @@ void ChordNode::fixBrokenPointers(Node *node) {
 	}
 	if (predecessor->getId() == node->getId()) {
 		predecessor = new Node(thisNode->toString());
-	} 
+	}
 	if (successor->getId() == node->getId()) {
 		successor = new Node(thisNode->toString());
 	}
