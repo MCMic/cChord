@@ -17,8 +17,8 @@
 #define FIXFINGER_H
 
 #include "Thread.h"
-#include "ChordNode.h"
-#include "ProtocolSingleton.h"
+#include "protocols/chord/ChordNode.h"
+#include "protocols/ProtocolSingleton.h"
 
 class FixFinger: public Thread {
 

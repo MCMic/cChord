@@ -11,7 +11,7 @@
 #ifndef PROTOCOL_SINGLETON_H
 #define PROTOCOL_SINGLETON_H
 
-#include "ChordNode.h"
+#include "chord/ChordNode.h"
 #include <string>
 
 class ProtocolSingleton

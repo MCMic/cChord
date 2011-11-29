@@ -19,7 +19,7 @@ int main(int argc, char * const argv[])
 {
 	string backBone[] = {
 			// user backbone
-            "127.0.0.1",
+            "157.169.102.237",
 	};
 	
     Node *chord = NULL;
@@ -27,18 +27,18 @@ int main(int argc, char * const argv[])
 
 	if (argc >= 4) {
 		// Create a test node
-		node = P_SINGLETON->initChordNode(std::string(argv[1]), atoi(argv[2]), std::string("chordTestBed"), std::string(argv[3]));
+		node = P_SINGLETON->initChordNode(string(argv[1]), atoi(argv[2]), string("chordTestBed2"), string(argv[3]));
         chord = NULL;
         
 		// join to an existing chord
 		if (argc == 5) {
-			cout << "joining...\n";
+			cout << "joining..." << endl;
 			int i = 0;
 		    chord = new Node(backBone[0], 8000);
 			node->join(chord);
 		}
 
-		char entry[256];
+        int chx;
 		string key;
 		string value;
 		
@@ -47,14 +47,13 @@ int main(int argc, char * const argv[])
 					"1) Put\n" << 
 					"2) Get\n" <<
 					"3) Remove\n" << 
-					"4) Exit\n\n";
+					"4) Exit\n";
 			cout << "---> ";
-			cin >> entry;
-			int chx = atoi(entry);
+			cin >> chx;
 
 			switch (chx) {
     			case 0:
-    				cout << "\n" << node->printStatus();
+    				cout << node->printStatus();
     				break;
     			case 1:
     				cout << "Key = ";
@@ -66,7 +65,7 @@ int main(int argc, char * const argv[])
     			case 2:
     				cout << "Key = ";
     				cin >> key;
-    				cout << "\n" << node->get(key) << "------> found!" << endl;
+    				cout << node->get(key) << "------> found!" << endl;
     				break;
     			case 3:
     				cout << "Key = ";
@@ -80,7 +79,7 @@ int main(int argc, char * const argv[])
 			}       
 	    }
     } else {
-		cout << "wrong parameters: test.out <hostname> <portNumber> <webContentDirectory> [--join]\n";
+		cout << "wrong parameters: test.out <hostname> <portNumber> <webContentDirectory> [--join]" << endl;
 	}
 
     delete node;

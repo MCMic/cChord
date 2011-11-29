@@ -6,7 +6,7 @@
  *
  */
 
-#include "ProtocolSingleton.h"
+#include "protocols/ProtocolSingleton.h"
 
 ProtocolSingleton* ProtocolSingleton::instance = NULL;
 

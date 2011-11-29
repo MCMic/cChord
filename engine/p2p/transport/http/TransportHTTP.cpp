@@ -6,14 +6,14 @@
  *
  */
 
-#include "http_operations.h" //I include .c file for the linker to notice the .o
-#include "TransportHTTP.h"
+#include "transport/http/http_operations.h" //I include .c file for the linker to notice the .o
+#include "transport/http/TransportHTTP.h"
 #include "HTTP_Client.h"
-#include "ChordNode.h"
-#include "IOverlay.h"
-#include "callbacks.h"
-#include "Request.h"
-#include "ProtocolSingleton.h"
+#include "protocols/chord/ChordNode.h"
+#include "transport/IOverlay.h"
+#include "mongoose_http_server/callbacks/callbacks.h"
+#include "request/Request.h"
+#include "protocols/ProtocolSingleton.h"
 #include <arpa/inet.h>
 #include <sstream>
 #include <iostream>

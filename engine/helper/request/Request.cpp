@@ -8,7 +8,7 @@
  */
 
 #include "Request.h"
-#include "ChordTransportCode.h"
+#include "protocols/chord/ChordTransportCode.h"
 
 /* Constructor */
 Request::Request(string overlayID, int code) {

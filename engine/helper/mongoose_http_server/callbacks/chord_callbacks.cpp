@@ -8,10 +8,10 @@
  */
 
 #include "chord_callbacks.h"
-#include "ProtocolSingleton.h"
-#include "mongoose.h"
-#include "http_operations.h"
-#include "sha1.h"
+#include "protocols/ProtocolSingleton.h"
+#include "mongoose_http_server/mongoose.h"
+#include "transport/http/http_operations.h"
+#include "crypto/sha1.h"
 #include <assert.h>
 
 /*

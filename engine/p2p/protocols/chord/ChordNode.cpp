@@ -6,13 +6,13 @@
  *
  */
 
-#include "ChordNode.h"
-#include "Stabilization.h"
-#include "CheckPred.h"
-#include "FixFinger.h"
-#include "TransportHTTP.h"
-#include "callbacks.h"
-#include "sha1.h";
+#include "protocols/chord/ChordNode.h"
+#include "thread/Stabilization.h"
+#include "thread/CheckPred.h"
+#include "thread/FixFinger.h"
+#include "transport/http/TransportHTTP.h"
+#include "mongoose_http_server/callbacks/callbacks.h"
+#include "crypto/sha1.h"
 #include <sstream>
 #include <iostream>
 #include <sys/stat.h>

@@ -6,7 +6,7 @@
  *
  */
 
-#include "http_operations.h"
+#include "transport/http/http_operations.h"
 #include <iostream>
 #include <fstream>
 #include <cstdio>
