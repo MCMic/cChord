@@ -59,7 +59,7 @@ unsigned int SHA1::shaToInteger( unsigned char* c, int l, unsigned int spacesize
 	hex_map['e'] = 14;
 	hex_map['f'] = 15;
 	double result = 0.0;
-	char part[2];
+	char part[3];
 	while( l > 0 ) {
 		int degree = l*2;
 		sprintf(part, "%x", *c );
