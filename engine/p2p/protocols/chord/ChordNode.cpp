@@ -76,7 +76,7 @@ void ChordNode::notify(Node *n) {
 
 /* Custom chord stabilize */
 void ChordNode::stabilize() {
-    cout << "stabilize" << endl;
+    //~ cout << "ChordNode stabilize" << endl;
 	((AbstractChord *) this)->stabilize();
 	// If the predecessor as changed, update the DHT table
 	if (notified && predecessor->getId() != thisNode->getId()) {

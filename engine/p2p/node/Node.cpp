@@ -15,7 +15,7 @@
  *	Constructors
  */
 Node::Node(const string &inIp, unsigned int inId, unsigned int inPort) {
-    cout << "Node constructor " << inIp << endl;
+    //~ cout << "Node constructor " << inIp << endl;
 	ip = inIp;
 	nid = inId;
 	port = inPort;
@@ -27,6 +27,7 @@ Node::Node(const string &inIp, unsigned int inId, unsigned int inPort) {
 }
 
 Node::Node(const string &inIp, unsigned int inPort) {
+    //~ cout << "Node constructor " << inIp << endl;
 	ip = inIp;
 	nid = 0;
 	port = inPort;
@@ -38,6 +39,7 @@ Node::Node(const string &inIp, unsigned int inPort) {
 }
 
 Node::Node(const string &inData) {
+    //~ cout << "Node constructor " << inData << endl;
 	string inID, inIP, inPort;
 	int at = inData.find("@");
 	inID = inData.substr(0, at);

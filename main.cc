@@ -2,6 +2,7 @@ using namespace std;
 
 #include "lib/TextHandler.hh"
 #include <stdlib.h>
+#include <myMed/ProtocolSingleton.h>
 
 // This application receives args, "ip", "port" [, "ip2", "port2"]
 int main(int argc, char * const argv[]) {
@@ -10,10 +11,11 @@ int main(int argc, char * const argv[]) {
         return EXIT_SUCCESS;
     }
         
-    TextHandler th(string(argv[1]), atoi(argv[2]));
+    TextHandler *th = new TextHandler(argv[1], atoi(argv[2]));
+    P_SINGLETON->setProtocolNode(th);
     if(argc>4) {
         cout << "connecting to " << argv[3] << ":" << argv[4] << endl;
-        th.connect(string(argv[3]), atoi(argv[4]));
+        th->connect(argv[3], atoi(argv[4]));
     }
     
     int chx;
@@ -31,17 +33,17 @@ int main(int argc, char * const argv[]) {
 
         switch (chx) {
             case 0:
-                cout << th.printStatus();
+                cout << th->printStatus();
                 break;
             case 1:
                 cout << "Pos = ";
                 cin >> pos;
                 cout << "Value = ";
                 cin >> value;
-                th.insertText(pos, value);
+                th->insertText(pos, value);
                 break;
             case 2:
-                cout << th.getText() << endl;
+                cout << th->getText() << endl;
                 break;
             //~ case 3:
                 //~ cout << "Key = ";
@@ -49,10 +51,11 @@ int main(int argc, char * const argv[]) {
                 //~ node->removekey(key);
                 //~ break;
             case 4:
-                th.shutDown();
+                th->shutDown();
                 quit = true;
             default:
             break;
         }       
     }
+    delete th;
 }

@@ -79,15 +79,19 @@ void AbstractChord::join(Node* chord) {
 }
 
 void AbstractChord::stabilize() {
+    //~ cout << "AbstractChord stabilize" << endl;
 	//Forge the message that we will sendRequest (GETPRED)
 	Request *pred_request = new Request(this->getIdentifier(), GETPRED);
 	string pred = sendRequest(pred_request, successor);
 
-	Node *x = new Node(pred);
-	if (x->getId() != thisNode->getId() && insideRange(x->getId(),
-			thisNode->getId() + 1, successor->getId() - 1)) {
-		successor = x;
-	}
+
+    //~ if(!pred.empty()) {
+        Node *x = new Node(pred);
+        if (x->getId() != thisNode->getId() && insideRange(x->getId(),
+                thisNode->getId() + 1, successor->getId() - 1)) {
+            successor = x;
+        }
+    //~ }
 
 	//Forge the message that we will sendRequest (NOTIF)
 	Request *notif_request = new Request(this->getIdentifier(), NOTIF);
