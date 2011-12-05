@@ -34,6 +34,7 @@ int main(int argc, char* argv[]) try
     
     GtkWidget* wnd = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(wnd),800,600);
+    gtk_window_set_title(GTK_WINDOW(wnd),"DistributedWord");
     GtkTextView *gtw = GTK_TEXT_VIEW(gtk_text_view_new());
     //~ wnd.add(GTK_WIDGET(gtw));
     
