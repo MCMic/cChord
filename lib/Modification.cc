@@ -18,9 +18,8 @@ Modification::Modification(time_t t, std::string m, int pos, int oID, int bMI) {
     //~ afterModificationsI = aMI;
     //~ beforeModificationP = bMP;
     //~ afterModificationsP = aMP;
-    identificateur = 0;
     stringstream ss;
-    ss << *this;
+    ss << pos << m << oID << bMI << t;
     
     string str = ss.str();
 	SHA1 *sha1 = new SHA1();
@@ -60,10 +59,14 @@ istream& Modification::operator<<(istream& flux) {
     char* s;
     flux >> time;
     flux >> taille;
-    s =  new char[taille];
+    cout << "taille de " << taille << endl;
+    s = new char[taille+1];
+    s[taille] = '\0';
     flux.get(); // ignore space
     flux.read(s, taille);
+    cout << "s : " << s << endl;
     modification = s;
+    delete[] s;
     flux >> position;
     flux >> identificateur;
     flux >> ownedID;
