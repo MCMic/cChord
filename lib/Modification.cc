@@ -9,17 +9,19 @@ using namespace std;
 
 int Modification::nbModif = 0;
 
-Modification::Modification(time_t t, std::string m, int pos, int oID, int bMI) {
+Modification::Modification(time_t t, std::string m, int pos, int oID, int bMI, bool e) {
     time = t;
     modification = m;
     position = pos;
     ownedID = oID;
     beforeModificationI = bMI;
+    erase = e;
+    
     //~ afterModificationsI = aMI;
     //~ beforeModificationP = bMP;
     //~ afterModificationsP = aMP;
     stringstream ss;
-    ss << pos << m << oID << bMI << t;
+    ss << pos << m << oID << bMI << t << e;
     
     string str = ss.str();
 	SHA1 *sha1 = new SHA1();
@@ -33,15 +35,28 @@ Modification::Modification(time_t t, std::string m, int pos, int oID, int bMI) {
 }
 
 void Modification::applyTo(string &s) {
-    if(position >= s.size()) {
-        s.append(modification);
-    } else {
-        s.insert(position, modification);
-    }
+	if(erase) {
+		s.erase(position, modification.size());
+	} else {
+		if(position >= s.size()) {
+			s.append(modification);
+		} else {
+			s.insert(position, modification);
+		}
+	}
 }
 
 void Modification::cancelOn(string& s) {
-    s.erase(position,modification.size());
+	if(erase) {
+		if(position >= s.size()) {
+			s.append(modification);
+		} else {
+			s.insert(position, modification);
+		}
+	} else {
+		s.erase(position,modification.size());
+	}
+    
 }
         
 ostream& Modification::operator>>(ostream& flux) {
@@ -50,7 +65,8 @@ ostream& Modification::operator>>(ostream& flux) {
     flux << modification << " ";
     flux << position << " ";
     flux << identificateur << " ";
-    flux << ownedID << " " << beforeModificationI;
+    flux << ownedID << " " << beforeModificationI << " ";
+    flux << erase;
     return flux;
 }
 
@@ -69,5 +85,6 @@ istream& Modification::operator<<(istream& flux) {
     flux >> identificateur;
     flux >> ownedID;
     flux >> beforeModificationI;
+    flux >> erase;
     return flux;
 }

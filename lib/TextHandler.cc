@@ -34,9 +34,9 @@ void TextHandler::connect(string ip,int port) {
     saveData("",serialize(sendRequest(request, successor)));
 }
 
-void TextHandler::insertText(int pos, string str) {
+void TextHandler::insertText(int pos, string str, bool e) {
     cout << "insertText called" << endl;
-    Modification m(time(NULL),str,pos,0,lastModifId);
+    Modification m(time(NULL),str,pos,0,lastModifId, e);
     stringstream ss;
     ss << m;
     put("",ss.str());

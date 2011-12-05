@@ -12,12 +12,17 @@ class Modification {
         time_t time;
         std::string modification;
         unsigned position;
+        bool erase;
         int identificateur;
         int ownedID;
         int beforeModificationI;
 
     public:
-        Modification(time_t t=0, std::string m="", int pos=0, int oID=0, int bMI=0);
+        Modification(time_t t=0, std::string m="", int pos=0, int oID=0, int bMI=0, bool e=false);
+
+		int getE() {
+			return erase;
+		}
 
         int getId() {
             return identificateur;
