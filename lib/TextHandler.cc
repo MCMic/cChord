@@ -92,7 +92,7 @@ void TextHandler::saveData(string, string value) {
         //~ value.erase(0,value.find(" ")+1);
         //~ content.insert(pos,value);
         if(m.getPrevId()==lastModifId) {
-            modifTree[m.getPrevId()] = m;
+            modifTree[m.getId()] = m;
             lastModifId = m.getId();
             m.applyTo(content);
         } else {
