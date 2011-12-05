@@ -51,7 +51,7 @@ void TextHandler::put(string key, string value) {
         key = getIdentifier();
     }
     
-    saveData(key, value);
+    saveData(key, serialize(value));
     
 	Request *request = new Request(this->getIdentifier(), PUT);
 	request->addArg("key", key);
@@ -81,7 +81,7 @@ string TextHandler::get(string key) {
 
 /* data CRUD */
 void TextHandler::saveData(string, string value) {
-    cout << "saveData called" << endl;
+    cout << "saveData called with " << unserialize(value) << endl;
     try {
         value = unserialize(value);
         stringstream ss(value);
@@ -118,6 +118,7 @@ void TextHandler::saveData(string, string value) {
                     }
                 }
             } else { // The modif was not found
+                cout << "searching for " << m.getPrevId() << endl;
                 stringstream ss;
                 ss << m.getPrevId();
                 saveData("",serialize(get(ss.str())));
@@ -133,6 +134,10 @@ string TextHandler::printStatus() {
     stringstream ss;
     ss << ChordNode::printStatus();
     ss << "Content : " << content << endl;
+    ss << "Modif Tree : " << endl;
+    for(std::map<int,Modification>::iterator it = modifTree.begin(); it != modifTree.end();++it) {
+        ss << it->first << " : " << it->second << endl;
+    }
     return ss.str();
 }
 
