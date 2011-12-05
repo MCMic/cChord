@@ -59,12 +59,10 @@ istream& Modification::operator<<(istream& flux) {
     char* s;
     flux >> time;
     flux >> taille;
-    cout << "taille de " << taille << endl;
     s = new char[taille+1];
     s[taille] = '\0';
     flux.get(); // ignore space
     flux.read(s, taille);
-    cout << "s : " << s << endl;
     modification = s;
     delete[] s;
     flux >> position;
