@@ -11,6 +11,13 @@ string intToString(int p) {
     return ss.str();
 }
 
+int stringToInt(string s) {
+    stringstream ss(s);
+    int i;
+    ss >> i;
+    return i;
+}
+
 //~ TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,ip,"/tmp/"),chord(NULL) {
 TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,ip+intToString(port),"/tmp/"),chord(NULL) {
     cout << "constructor called" << endl;
@@ -54,12 +61,14 @@ void TextHandler::put(string key, string value) {
 }
 
 /* DHT Get */
-string TextHandler::get(string) {
+string TextHandler::get(string key) {
 	// Convert the key in a hash integer
-	int iKey = intToString(key);
+	int iKey = stringToInt(key);
 	if (modifTree.find(iKey)!=modifTree.end()) {
 		// I have this modif
-		return modifTree[iKey];
+        stringstream ss;
+        ss << modifTree[iKey];
+		return ss.str();
 	} else {
 		// Create a get request.
 		Request *request = new Request(this->getIdentifier(), GET);
@@ -83,12 +92,12 @@ void TextHandler::saveData(string filename, string value) {
         //~ value.erase(0,value.find(" ")+1);
         //~ content.insert(pos,value);
         if(m.getPrevId()==lastModifId) {
-            modifTree[m.getPrevId] = m;
+            modifTree[m.getPrevId()] = m;
             lastModifId = m.getId();
             m.applyTo(content);
         } else {
             int id = lastModifId;
-            while(modifTree[id]!=m.getPrevId()) {
+            while(modifTree[id].getId()!=m.getPrevId()) {
                 id = modifTree[id].getPrevId();
                 //FIXME : find what to do here
             }

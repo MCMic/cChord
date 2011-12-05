@@ -1,6 +1,7 @@
 #ifndef MODIFICATION_H_INCLUDED
 #define MODIFICATION_H_INCLUDED
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -19,7 +20,7 @@ class Modification {
         //~ std::vector<Modification*> afterModificationsP;
 
     public:
-        Modification(time_t t, std::string m, int pos, int oID, int bMI=0);
+        Modification(time_t t=0, std::string m="", int pos=0, int oID=0, int bMI=0);
 
         //~ void addModification(Modification* m) {
             //~ if(afterModificationsI.size() > 0) {
@@ -115,6 +116,40 @@ class Modification {
         void applyTo(std::string&);
         
         void cancelOn(std::string&);
+        
+        friend std::ostream& operator<<(std::ostream& flux, Modification& m) {
+            m >> flux;
+            return flux;
+        }
+
+        std::ostream& operator>>(std::ostream& flux) {
+            flux << time << " ";
+            flux << modification.size() << " ";
+            flux << modification << " ";
+            flux << position << " ";
+            flux << identificateur << " ";
+            flux << ownedID << " " << beforeModificationI;
+            return flux;
+        }
+
+        friend std::istream& operator>>(std::istream& flux, Modification& m) {
+            return (m << flux);
+        }
+
+        std::istream& operator<<(std::istream& flux) {
+            int taille;
+            char* s;
+            flux >> time;
+            flux >> taille;
+            s =  new char[taille];
+            flux.read(s, taille);
+            modification = s;
+            flux >> position;
+            flux >> identificateur;
+            flux >> ownedID;
+            flux >> beforeModificationI;
+            return flux;
+        }
 };
 
 #endif // MODIFICATION_H_INCLUDED
