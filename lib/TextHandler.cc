@@ -28,10 +28,10 @@ void TextHandler::connect(string ip,int port) {
     chord = new Node(ip, port);
     join(chord);
     
-    //~ Request *request = new Request(this->getIdentifier(), GET);
-    //~ request->addArg("key", "dummy_key");
+    Request *request = new Request(this->getIdentifier(), GET);
+    request->addArg("key", "0"); // 0 equals last modif
     // Send the Get request
-    //~ content = sendRequest(request, successor);
+    saveData("",serialize(sendRequest(request, successor)));
 }
 
 void TextHandler::insertText(int pos, string str) {
@@ -64,12 +64,17 @@ void TextHandler::put(string key, string value) {
 string TextHandler::get(string key) {
 	// Convert the key in a hash integer
 	int iKey = stringToInt(key);
+    if(iKey==0) {
+        iKey = lastModifId;
+    }
 	if (modifTree.find(iKey)!=modifTree.end()) {
+        cout << "returning modif" << endl;
 		// I have this modif
         stringstream ss;
         ss << modifTree[iKey];
 		return ss.str();
 	} else {
+        cout << "sending request to successor" << endl;
 		// Create a get request.
 		Request *request = new Request(this->getIdentifier(), GET);
 		request->addArg("key", key);
