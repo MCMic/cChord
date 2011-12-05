@@ -3,7 +3,7 @@ using namespace std;
 #include "lib/TextHandler.hh"
 #include "lib/Modification.hh"
 #include <stdlib.h>
-#include <myMed/ProtocolSingleton.h>
+#include <protocols/ProtocolSingleton.h>
 
 // This application receives args, "ip", "port" [, "ip2", "port2"]
 int main(int argc, char * const argv[]) {
