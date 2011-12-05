@@ -17,6 +17,8 @@ protected:
 	                      const Glib::ustring& text);
 	void on_insert_after(const Gtk::TextIter& iter,
 	                     const Glib::ustring& text);
+    void on_erase_before(const Gtk::TextIter& begin,
+                         const Gtk::TextIter& end);
 	GtkTextBuffer* m_buffer;
     
     bool m_editing;

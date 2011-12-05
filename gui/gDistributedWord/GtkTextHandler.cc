@@ -48,6 +48,11 @@ GtkTextHandler::GtkTextHandler(string ip, int port) : TextHandler(ip,port),m_buf
 		sigc::hide(sigc::mem_fun(*this, &GtkTextHandler::on_insert_after)),
 		true
 	);
+
+	cpp_buffer->signal_erase().connect(
+		sigc::mem_fun(*this, &GtkTextHandler::on_erase_before),
+		false
+	);
 }
 
 GtkTextBuffer* GtkTextHandler::get_buffer() const {
@@ -87,6 +92,23 @@ void GtkTextHandler::on_insert_after(const Gtk::TextIter& iter,
 	//~ tag_text(begin, iter, &m_self);
     m_editing = false;
     cout << "fin de on_insert_after" << endl;
+}
+
+void GtkTextHandler::on_erase_before(const Gtk::TextIter& begin,
+                                      const Gtk::TextIter& end)
+{
+    cout << "début de on_erase_before" << endl;
+	// Only local edits that are not done via erase
+	if(m_editing) return;
+	m_editing = true;
+    
+	Glib::RefPtr<Gtk::TextBuffer> cpp_buffer =
+		Glib::wrap(GTK_TEXT_BUFFER(m_buffer), true);
+        
+    eraseText(diff_bytes(cpp_buffer->begin(), begin),diff_bytes(begin, end));
+    
+    m_editing = false;
+    cout << "fin de on_erase_before" << endl;
 }
 
 void GtkTextHandler::saveData(string s, string value) {
