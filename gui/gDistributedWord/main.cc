@@ -51,6 +51,9 @@ int main(int argc, char* argv[]) try
     
 	gtk_container_add(GTK_CONTAINER(wnd), GTK_WIDGET(gtw));
     gtk_widget_show_all(wnd);
+    g_signal_connect(wnd, "destroy",
+      G_CALLBACK (gtk_main_quit), NULL);
+
     
     kit->run();
     
