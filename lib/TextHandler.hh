@@ -1,5 +1,6 @@
 
 #include "protocols/chord/ChordNode.h"
+#include "lib/Modification.hh"
 
 class TextHandler : public ChordNode {
     private:
@@ -8,6 +9,8 @@ class TextHandler : public ChordNode {
         
         std::string content;
         
+        std::map<int,Modification> modifTree;
+        int lastModifId;
     protected:
         //~ void updateNeeded();
         

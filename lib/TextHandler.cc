@@ -29,8 +29,9 @@ void TextHandler::connect(string ip,int port) {
 
 void TextHandler::insertText(int pos, string str) {
     cout << "insertText called" << endl;
+    Modification m(time(NULL),str,pos,0,lastModifId);
     stringstream ss;
-    ss << pos << " " << str;
+    ss << m;
     put("",ss.str());
 }
 
@@ -54,7 +55,18 @@ void TextHandler::put(string key, string value) {
 
 /* DHT Get */
 string TextHandler::get(string) {
-	return content;
+	// Convert the key in a hash integer
+	int iKey = intToString(key);
+	if (modifTree.find(iKey)!=modifTree.end()) {
+		// I have this modif
+		return modifTree[iKey];
+	} else {
+		// Create a get request.
+		Request *request = new Request(this->getIdentifier(), GET);
+		request->addArg("key", key);
+		// Send the get request
+		return sendRequest(request, successor);
+	}
 }
 
 
@@ -64,10 +76,23 @@ void TextHandler::saveData(string filename, string value) {
     try {
         value = unserialize(value);
         stringstream ss(value);
-        int pos;
-        ss >> pos;
-        value.erase(0,value.find(" ")+1);
-        content.insert(pos,value);
+        Modification m;
+        ss >> m;
+        //~ int pos;
+        //~ ss >> pos;
+        //~ value.erase(0,value.find(" ")+1);
+        //~ content.insert(pos,value);
+        if(m.getPrevId()==lastModifId) {
+            modifTree[m.getPrevId] = m;
+            lastModifId = m.getId();
+            m.applyTo(content);
+        } else {
+            int id = lastModifId;
+            while(modifTree[id]!=m.getPrevId()) {
+                id = modifTree[id].getPrevId();
+                //FIXME : find what to do here
+            }
+        }
     } catch(std::out_of_range e) {
         cout << "out of range" << endl;
     }

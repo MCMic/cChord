@@ -1,11 +1,20 @@
 using namespace std;
 
 #include "lib/TextHandler.hh"
+#include "lib/Modification.hh"
 #include <stdlib.h>
 #include <myMed/ProtocolSingleton.h>
 
 // This application receives args, "ip", "port" [, "ip2", "port2"]
-int main(int argc, char * const argv[]) {	
+int main(int argc, char * const argv[]) {
+    Modification m(time(NULL),"coucou",0,1);
+    string s;
+    m.applyTo(s);
+    cout << "s : '" << s << "'" << endl;
+    m.cancelOn(s);
+    cout << "s : '" << s << "'" << endl;
+    
+    
     if(argc<3) {
         cout << "usage : " << argv[0] << " myIp myPort [otherIp otherPort]" << endl;
         return EXIT_SUCCESS;
