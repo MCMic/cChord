@@ -28,10 +28,10 @@ void TextHandler::connect(string ip,int port) {
     chord = new Node(ip, port);
     join(chord);
     
-    Request *request = new Request(this->getIdentifier(), GET);
-    request->addArg("key", "dummy_key");
-    // Send the Put request
-    content = sendRequest(request, successor);
+    //~ Request *request = new Request(this->getIdentifier(), GET);
+    //~ request->addArg("key", "dummy_key");
+    // Send the Get request
+    //~ content = sendRequest(request, successor);
 }
 
 void TextHandler::insertText(int pos, string str) {
