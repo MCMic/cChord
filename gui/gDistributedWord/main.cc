@@ -2,7 +2,7 @@
 #include <gtkmm/main.h>
 #include <gtkmm/window.h>
 #include "GtkTextHandler.hh"
-#include <myMed/ProtocolSingleton.h>
+#include <protocols/ProtocolSingleton.h>
 
 using namespace std;
 
