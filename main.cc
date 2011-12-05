@@ -43,7 +43,9 @@ int main(int argc, char * const argv[]) {
         cout << "0) Print status" << endl
             << "1) Insert Text" << endl
             << "2) Display Text" << endl
-            << "4) Exit" << endl;
+            << "3) Erase Test" << endl
+            << "4) Exit" << endl
+            /*<< "5) Cancel" << endl*/;
         cout << "---> ";
         cin >> chx;
 
@@ -61,14 +63,19 @@ int main(int argc, char * const argv[]) {
             case 2:
                 cout << th->getText() << endl;
                 break;
-            //~ case 3:
-                //~ cout << "Key = ";
-                //~ cin >> key;
-                //~ node->removekey(key);
-                //~ break;
+            case 3:
+                cout << "pos = ";
+                cin >> pos;
+                cin >> value;
+                th->insertText(pos, value, true);
+                break;
             case 4:
                 th->shutDown();
                 quit = true;
+                break;
+            //case 5:
+			//	th->;
+			//	break;
             default:
             break;
         }       
