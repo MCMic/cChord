@@ -129,6 +129,13 @@ void TextHandler::saveData(string, string value) {
     }
 }
 
+string TextHandler::printStatus() {
+    stringstream ss;
+    ss << ChordNode::printStatus();
+    ss << "Content : " << content << endl;
+    return ss.str();
+}
+
 //~ void updateNeeded() {
     //~ 
 //~ }

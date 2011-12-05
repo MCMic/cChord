@@ -24,4 +24,5 @@ class TextHandler : public ChordNode {
         void insertText(int pos, std::string text);
         void connect(std::string,int);
         std::string getText() {return content;}
+        string printStatus();
 };

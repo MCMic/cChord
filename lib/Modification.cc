@@ -1,5 +1,9 @@
 #include "Modification.hh"
 #include "crypto/sha1.h"
+#include <sstream>
+#include <cstring>
+#include <cstdlib>
+#include <cmath>
 
 using namespace std;
 
@@ -17,7 +21,16 @@ Modification::Modification(time_t t, std::string m, int pos, int oID, int bMI) {
     identificateur = 0;
     stringstream ss;
     ss << *this;
-    identificateur = getIntSHA1(ss.str());
+    
+    string str = ss.str();
+	SHA1 *sha1 = new SHA1();
+	sha1->addBytes( str.c_str(), strlen( str.c_str() ));
+	unsigned char* digest = sha1->getDigest();
+	unsigned int res = sha1->shaToInteger(digest, 20, pow(2, 9));
+	delete sha1;
+	free( digest );
+    
+	identificateur = res;
 }
 
 void Modification::applyTo(string &s) {
