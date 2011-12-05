@@ -19,7 +19,7 @@ int stringToInt(string s) {
 }
 
 //~ TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,ip,"/tmp/"),chord(NULL) {
-TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,ip+intToString(port),"/tmp/"),chord(NULL) {
+TextHandler::TextHandler(string ip,int port) : ChordNode(ip,port,ip+intToString(port),"/tmp/"),chord(NULL),lastModifId(0) {
     cout << "constructor called" << endl;
 }
 
@@ -80,7 +80,7 @@ string TextHandler::get(string key) {
 
 
 /* data CRUD */
-void TextHandler::saveData(string filename, string value) {
+void TextHandler::saveData(string, string value) {
     cout << "saveData called" << endl;
     try {
         value = unserialize(value);
@@ -97,9 +97,31 @@ void TextHandler::saveData(string filename, string value) {
             m.applyTo(content);
         } else {
             int id = lastModifId;
-            while(modifTree[id].getId()!=m.getPrevId()) {
+            while(id!=0 && modifTree[id].getPrevId()!=m.getPrevId()) {
                 id = modifTree[id].getPrevId();
-                //FIXME : find what to do here
+            }
+            if(id!=0) { // The modif was found
+                if(id != m.getId()) { // we have an other modif at the same place
+                    if (m.getTime() < modifTree[id].getTime()) { // we got the bad one
+                        id = lastModifId;
+                        while(modifTree[id].getPrevId()!=m.getPrevId()) { // cancel bad modifications
+                            int prevId = modifTree[id].getPrevId();
+                            modifTree[id].cancelOn(content);
+                            modifTree.erase(id);
+                            id = prevId;
+                        }
+                        modifTree[id].cancelOn(content);
+                        modifTree.erase(id);
+                        
+                        modifTree[id] = m;
+                        lastModifId = m.getId();
+                    }
+                }
+            } else { // The modif was not found
+                stringstream ss;
+                ss << m.getPrevId();
+                saveData("",serialize(get(ss.str())));
+                saveData("",value);
             }
         }
     } catch(std::out_of_range e) {

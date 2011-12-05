@@ -14,6 +14,13 @@ int main(int argc, char * const argv[]) {
     m.cancelOn(s);
     cout << "s : '" << s << "'" << endl;
     
+    cout << m << endl;
+    stringstream ss;
+    ss << m;
+    Modification m2;
+    m2 << ss;
+    cout << m2 << endl;
+    
     
     if(argc<3) {
         cout << "usage : " << argv[0] << " myIp myPort [otherIp otherPort]" << endl;
