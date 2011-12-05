@@ -36,12 +36,13 @@ int main(int argc, char* argv[]) try
     GtkTextView *gtw = GTK_TEXT_VIEW(gtk_text_view_new());
     //~ wnd.add(GTK_WIDGET(gtw));
     
-        
+    
     GtkTextHandler* gth = new GtkTextHandler(argv[1], atoi(argv[2]));
     P_SINGLETON->setProtocolNode(gth);
     if(argc>4) {
         cout << "connecting to " << argv[3] << ":" << argv[4] << endl;
         gth->connect(argv[3], atoi(argv[4]));
+        cout << gth->printStatus() << endl;
     }
     GtkTextBuffer* buffer = gth->get_buffer();
 	gtk_text_view_set_buffer(GTK_TEXT_VIEW(gtw), GTK_TEXT_BUFFER(buffer));
