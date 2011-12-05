@@ -3,6 +3,7 @@
 std::size_t diff_bytes(const Gtk::TextIter& begin,
                        const Gtk::TextIter& end)
 {
+    cout << "début de diff_bytes" << endl;
     std::size_t bytes = 0;
     Gtk::TextIter iter = begin;
 
@@ -28,6 +29,7 @@ std::size_t diff_bytes(const Gtk::TextIter& begin,
 
         bytes += line_bytes;
     }
+    cout << "fin de diff_bytes" << endl;
 
     return bytes;
 }
@@ -55,6 +57,7 @@ GtkTextBuffer* GtkTextHandler::get_buffer() const {
 void GtkTextHandler::on_insert_before(const Gtk::TextIter& iter,
                                        const Glib::ustring& text)
 {
+    cout << "début de on_insert_before" << endl;
 	// Only local edits that are not done via insert
 	if(m_editing) return;
 	//~ editor edit(m_editing);
@@ -66,11 +69,13 @@ void GtkTextHandler::on_insert_before(const Gtk::TextIter& iter,
 	cout << pos << "," <<  text << endl;
     insertText(pos,text);
     m_editing = false;
+    cout << "fin de on_insert_before" << endl;
 }
 
 void GtkTextHandler::on_insert_after(const Gtk::TextIter& iter,
                                       const Glib::ustring& text)
 {
+    cout << "début de on_insert_after" << endl;
 	if(m_editing) return;
 	//~ editor edit(m_editing);
     m_editing = true;
@@ -78,15 +83,18 @@ void GtkTextHandler::on_insert_after(const Gtk::TextIter& iter,
 	//~ Gtk::TextIter begin = iter;
 	//~ begin.backward_chars(text.length() );
 
-    gtk_text_buffer_set_text(m_buffer,content.c_str(),-1); // modifie le buffer, donc lance un signal, qu'on catch , …
+    gtk_text_buffer_set_text(m_buffer,content.c_str(),-1);
 	//~ tag_text(begin, iter, &m_self);
     m_editing = false;
+    cout << "fin de on_insert_after" << endl;
 }
 
 void GtkTextHandler::saveData(string s, string value) {
+    cout << "début de saveData" << endl;
     TextHandler::saveData(s, value);
     
     m_editing = true;
     gtk_text_buffer_set_text(m_buffer,content.c_str(),-1); // modifie le buffer, donc lance un signal, qu'on catch , …
     m_editing = false;
+    cout << "fin de saveData" << endl;
 }
