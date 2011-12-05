@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "fileselect.c"
 #include "menu.c"
+#include "GtkTextHandler.hh"
 
 
 /*gcc editor.c -Wall -ansi -o Editor `pkg-config --cflags --libs gtk+-2.0` */
@@ -89,6 +90,10 @@ int main(int argc, char *argv[])
     /* put the text widget in the scroll window */
     gtk_container_add(GTK_CONTAINER(scroll), view);
 
+    GtkTextHandler* gth = new GtkTextHandler();
+    GtkSourceBuffer* buffer = gth->get_buffer();
+	gtk_text_view_set_buffer(GTK_TEXT_VIEW(view), GTK_TEXT_BUFFER(buffer));
+    
     
     gtk_widget_show_all(window); /* show all widgets in the window */
 

@@ -11,7 +11,7 @@ void find (GtkTextView *text_view, const gchar *text, GtkTextIter *iter)
   gboolean found;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(text_view));
-  found = gtk_text_iter_forward_search (iter, text, 0, &mstart, &mend, NULL);
+  found = gtk_text_iter_forward_search (iter, text, GtkTextSearchFlags(0), &mstart, &mend, NULL);
 
   if (found)
     {

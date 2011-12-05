@@ -189,7 +189,7 @@ static gboolean save_if_modified(void)
     if(!gtk_text_buffer_get_modified(GTK_TEXT_BUFFER(buf)))
 	return TRUE;
 
-    dialog = gtk_message_dialog_new(GTK_WINDOW(window), 0, GTK_MESSAGE_QUESTION,
+    dialog = gtk_message_dialog_new(GTK_WINDOW(window), GtkDialogFlags(0), GTK_MESSAGE_QUESTION,
 				    GTK_BUTTONS_NONE,
 				    "Buffer Modified. Do you want to save it now?");
     gtk_dialog_add_buttons(GTK_DIALOG(dialog), GTK_STOCK_YES, GTK_RESPONSE_YES,

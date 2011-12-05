@@ -1,9 +1,9 @@
 #include <gtk/gtk.h>
 #include<string.h>
 
-extern GtkWidget *view;
-GtkWidget *text_view;
-GtkWidget *search_entry,*replace_entry;
+//~ extern GtkWidget *view;
+//~ GtkWidget *text_view;
+GtkWidget *replace_entry;
 
 void replace (GtkTextView *text_view, const gchar *text,const gchar *text1, GtkTextIter *iter)
 {
@@ -12,7 +12,7 @@ void replace (GtkTextView *text_view, const gchar *text,const gchar *text1, GtkT
   gboolean found;
   
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(text_view));
-  found = gtk_text_iter_forward_search (iter, text, 0, &mstart, &mend, NULL);
+  found = gtk_text_iter_forward_search (iter, text, GtkTextSearchFlags(0), &mstart, &mend, NULL);
   if (found)
     {
       gtk_text_buffer_select_range (buffer, &mstart, &mend);

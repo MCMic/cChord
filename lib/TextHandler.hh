@@ -7,11 +7,11 @@ class TextHandler : public ChordNode {
         Node *chord;
         std::string myIp;
         
+    protected:
         std::string content;
         
         std::map<int,Modification> modifTree;
         int lastModifId;
-    protected:
         //~ void updateNeeded();
         
         /* IOverlay Pure METHODS */
