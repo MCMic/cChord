@@ -140,6 +140,46 @@ class Modification {
                 afterModificationsP[0]->toString(s);
             }
         }
+
+        /*std::string serialize() {
+            std::string s;
+            s += "[" + identificateur + "]";
+            s += "time = " + time;
+            s += "modification = " + modification;
+            s += "position = " + position;
+            s += "identificateur = " + identificateur;
+            s += "ownerID = " + ownedID;
+            s += "beforeModification = " + beforeModificationI;
+            return s;
+        }*/
+        friend std::ostream& operator<<(std::ostream& flux, Modification& m) {
+            m >> flux;
+            return flux;
+        }
+
+        std::ostream& operator>>(std::ostream& flux) {
+            flux << time << " " << modification.size() << " " << modification << " " << position << " " << identificateur << " " << ownedID << " " << beforeModificationI;
+            return flux;
+        }
+
+        friend std::istream& operator>>(std::istream& flux, Modification& m) {
+            return (m << flux);
+        }
+
+        std::istream& operator<<(std::istream& flux) {
+            int taille;
+            char* s;
+            flux >> time;
+            flux >> taille;
+            s =  new char[taille];
+            flux.read(s, taille);
+            modification = s;
+            flux >> position;
+            flux >> identificateur;
+            flux >> ownedID;
+            flux >> beforeModificationI;
+            return flux;
+        }
 };
 
 #endif // MODIFICATION_H_INCLUDED
