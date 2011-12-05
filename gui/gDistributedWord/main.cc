@@ -59,10 +59,10 @@ int main(int argc, char* argv[]) try
 catch(Glib::Exception& e)
 {
 	//~ handle_exception(e.what() );
-    cout << e.what() << endl;
+    cout << "Exception 1 : " << e.what() << endl;
 }
 catch(std::exception& e)
 {
 	//~ handle_exception(e.what() );
-    cout << e.what() << endl;
+    cout << "Exception 2 : " << e.what() << endl;
 }

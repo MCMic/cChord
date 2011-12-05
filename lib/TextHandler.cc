@@ -65,7 +65,11 @@ string TextHandler::get(string key) {
 	// Convert the key in a hash integer
 	int iKey = stringToInt(key);
     if(iKey==0) {
-        iKey = lastModifId;
+        if(lastModifId!=0) {
+            iKey = lastModifId;
+        } else {
+            return "";
+        }
     }
 	if (modifTree.find(iKey)!=modifTree.end()) {
         cout << "returning modif" << endl;
