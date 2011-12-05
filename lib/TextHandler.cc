@@ -73,6 +73,6 @@ void TextHandler::saveData(string filename, string value) {
     }
 }
 
-void updateNeeded() {
-    
-}
+//~ void updateNeeded() {
+    //~ 
+//~ }

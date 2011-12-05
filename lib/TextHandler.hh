@@ -9,7 +9,7 @@ class TextHandler : public ChordNode {
         std::string content;
         
     protected:
-        void updateNeeded();
+        //~ void updateNeeded();
         
         /* IOverlay Pure METHODS */
         void   put(string key, string value);
