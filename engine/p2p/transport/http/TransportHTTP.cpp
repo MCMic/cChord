@@ -119,6 +119,7 @@ string TransportHTTP::connectToTracker(const string &ip, int port, Node *n) {
 
 
 	this->sendTrackerRequest("209.85.227.104", 80, "/");
+	cerr << "IP hard coded oO" << endl;
 
 	//http_get("209.85.227.99", 80, "/");
 }
