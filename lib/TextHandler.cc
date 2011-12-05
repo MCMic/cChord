@@ -34,6 +34,14 @@ void TextHandler::connect(string ip,int port) {
     saveData("",serialize(sendRequest(request, successor)));
 }
 
+void TextHandler::eraseText(int pos, int len) { // erase len characters at pos position
+	cout << "eraseText called" << endl;
+	Modification m(time(NULL),content.substr(pos, len),pos,0,lastModifId, true);
+    stringstream ss;
+    ss << m;
+    put("",ss.str());
+}
+	
 void TextHandler::insertText(int pos, string str, bool e) {
     cout << "insertText called" << endl;
     Modification m(time(NULL),str,pos,0,lastModifId, e);

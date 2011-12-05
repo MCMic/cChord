@@ -18,6 +18,8 @@ protected:
 	void on_insert_after(const Gtk::TextIter& iter,
 	                     const Glib::ustring& text);
 	GtkTextBuffer* m_buffer;
+	Gtk::TextIter m_iter;
+	GtkTextMark mark;
     
     bool m_editing;
 };

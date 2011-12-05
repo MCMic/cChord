@@ -74,12 +74,16 @@ void GtkTextHandler::on_insert_after(const Gtk::TextIter& iter,
 	if(m_editing) return;
 	//~ editor edit(m_editing);
     m_editing = true;
-
+	
+	mark =  *gtk_text_buffer_get_mark(m_buffer, "insert");
+	
 	//~ Gtk::TextIter begin = iter;
 	//~ begin.backward_chars(text.length() );
-
     gtk_text_buffer_set_text(m_buffer,content.c_str(),-1); // modifie le buffer, donc lance un signal, qu'on catch , …
-	//~ tag_text(begin, iter, &m_self);
+    gtk_text_buffer_get_iter_at_mark(m_buffer, m_iter.gobj(), &mark);
+    gtk_text_buffer_place_cursor(m_buffer, m_iter.gobj());
+	//~ tag_text(begin, iter, &m_self)
+	//gtk_text_iter_backward_cursor_positions(m_iter.gobj(), 1);
     m_editing = false;
 }
 

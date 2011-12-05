@@ -21,6 +21,7 @@ class TextHandler : public ChordNode {
         void saveData(string filename, string value);
     public:
         TextHandler(std::string,int);
+        void eraseText(int, int);
         void insertText(int pos, std::string text, bool e = false);
         void connect(std::string,int);
         std::string getText() {return content;}
