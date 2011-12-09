@@ -20,8 +20,6 @@ protected:
     void on_erase_before(const Gtk::TextIter& begin,
                          const Gtk::TextIter& end);
 	GtkTextBuffer* m_buffer;
-	Gtk::TextIter m_iter;
-	GtkTextMark mark;
     
     bool m_editing;
 };

@@ -85,8 +85,6 @@ void GtkTextHandler::on_insert_after(const Gtk::TextIter& iter,
 	//~ editor edit(m_editing);
     m_editing = true;
 	
-	mark =  *gtk_text_buffer_get_mark(m_buffer, "insert");
-	
 	//~ Gtk::TextIter begin = iter;
 	//~ begin.backward_chars(text.length() );
     gtk_text_buffer_set_text(m_buffer,content.c_str(),-1);
